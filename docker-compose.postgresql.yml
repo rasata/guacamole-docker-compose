@@ -1,0 +1,17 @@
+version: '3.9'
+services:
+  postgres:
+    image: postgres:latest
+    container_name: postgres_instance
+    environment:
+      POSTGRES_USER: guacamole_user
+      POSTGRES_PASSWORD: guacamole_password
+      POSTGRES_DB: guacamole_db # Remplacez "my_database" par le nom souhaité de votre base de données
+    ports:
+      - "5432:5432" # Port de PostgreSQL
+    restart: always
+    volumes:
+      - ./init:/docker-entrypoint-initdb.d:z
+      - ./data:/var/lib/postgresql/data:Z
+volumes:
+  pg_data:
